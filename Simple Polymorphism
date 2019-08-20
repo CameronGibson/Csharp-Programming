@@ -1,0 +1,64 @@
+//Rextester.Program.Main is the entry point for your code. Don't change it.
+//Compiler version 4.0.30319.17929 for Microsoft (R) .NET Framework 4.5
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Rextester
+{
+    
+    //@author Cameron Gibson
+    
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+           Poly poly = new Poly();
+           Poly morph = new Morphism(); 
+           //static polymorphism         
+           poly.Print();
+           poly.Print(1);
+           poly.Print(1,2);
+           //dynamic polymorphism
+           poly.Override();
+           morph.Override();
+        }
+    }
+}
+
+class Poly{
+    
+    public Poly(){
+    
+    }
+    
+    public void Print(){
+    Console.WriteLine("Empty print method");
+    }
+    
+    public void Print(int a){
+        Console.WriteLine("Overloaded print method with one parameter");
+    }
+    
+    public void Print(int a, int b){
+        Console.WriteLine("Overloaded with two parameters, print method");
+    }
+    
+    public virtual void Override(){
+       Console.WriteLine("Not overriding parent class."); 
+    }      
+}
+
+
+class Morphism : Poly{
+
+    public Morphism(){
+        
+    }
+    
+    public override void Override(){
+       Console.WriteLine("Overriding parent class."); 
+    }
+}
