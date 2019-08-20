@@ -1,0 +1,93 @@
+//Rextester.Program.Main is the entry point for your code. Don't change it.
+//Compiler version 4.0.30319.17929 for Microsoft (R) .NET Framework 4.5
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Rextester
+{
+    
+    //@author Cameron Gibson
+    
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Shape tri = new Triangle("Purple",12,15);
+            Console.WriteLine(tri.ToString());
+            Shape circ = new Circle("Pink",45);
+            Console.WriteLine(circ.ToString());         
+        }
+    }
+}
+class Shape{
+    
+    public string color{protected get; set;}
+ 
+    public Shape(){       
+    }
+    
+    public Shape(string color){
+        this.color = color;
+    }
+    
+    public void PrintColor(){
+        Console.WriteLine(this.color);
+    }
+    
+    public override string ToString(){
+         return color;
+    }
+}
+
+class Circle : Shape{
+    
+    public double diameter{protected get; set;}
+    public double circumference{protected get; set;}
+    public double radius{protected get; set;}
+        
+    public Circle(string color, double diameter):base(color){
+                this.diameter = diameter;
+                this.circumference = FindCircumference(diameter);
+                this.radius = FindRadius(diameter);
+    }
+    private double FindCircumference(double d){
+        double diameter = d * Math.PI;
+        return diameter;
+    }
+    
+    private double FindRadius(double d){
+        double radius = (d * Math.PI) * 2;    
+        return radius;
+    }
+    
+    public override string ToString(){
+        return string.Format("Diameter:{0} Circumference:{1:n3} Radius:{2:n3}"
+                             ,diameter,circumference,radius);
+    }
+}
+
+class Triangle : Shape{
+     
+    public double side1{protected get; set;}
+    public double side2{protected get; set;}
+    public double side3{protected get; set;}
+    
+    
+    public Triangle(string color, double side1, double side2):base(color){
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = FindHypotenuse();
+    }
+    
+    private double FindHypotenuse(){
+        double hypotenuse = (side1 * side2) / 2;
+        return hypotenuse;
+    }
+    
+    public override string ToString(){
+        return string.Format("Side A:{0} Side B:{1} Hypotenuse: {2}",side1,side2,side3);
+    }
+}
